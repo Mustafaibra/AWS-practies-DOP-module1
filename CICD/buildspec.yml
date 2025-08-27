@@ -1,0 +1,31 @@
+version: 0.2
+
+
+batch:
+  fast-fail: ture
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Building the application..."
+      - npm run build
+  post_build:
+    commands:
+      - echo "Build completed successfully."
+      - echo "Starting tests..."
+      - npm test
+      - echo "Tests completed successfully."
+      - gh 
+    finally:
+      - echo "Cleaning up..."
+      - npm run clean
+  artifacts:
+    files:
+      - /**/*
+    name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
