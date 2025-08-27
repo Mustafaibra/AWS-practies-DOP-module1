@@ -1,8 +1,5 @@
 version: 0.2
 
-
-batch:
-  fast-fail: ture
 phases:
   install:
     runtime-versions:
@@ -21,11 +18,10 @@ phases:
       - echo "Starting tests..."
       - npm test
       - echo "Tests completed successfully."
-      - gh 
-    finally:
       - echo "Cleaning up..."
-      - npm run clean
-  artifacts:
-    files:
-      - /**/*
-    name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
+      - npm run clean || echo "No clean script"
+
+artifacts:
+  files:
+    - build/**/*     # or dist/**/* depending on your Node.js build output
+  name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
