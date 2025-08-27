@@ -8,6 +8,7 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - npm install
+      - npm run lint || echo "Lint warnings, continuing..."
   build:
     commands:
       - echo "Building the application..."
@@ -20,7 +21,7 @@ phases:
       - echo "Cleaning up..."
       - npm run clean || echo "No clean script"
 
-artifacts:
-  files:
-    - build/**/*     # or dist/**/* depending on your Node.js build output
-  name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
+# artifacts:
+#   files:
+#     - build/**/*     # or dist/**/* depending on your Node.js build output
+#   name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
