@@ -11,7 +11,6 @@ phases:
   build:
     commands:
       - echo "Building the application..."
-      - npm run build
   post_build:
     commands:
       - echo "Build completed successfully."
